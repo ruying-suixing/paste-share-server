@@ -3,7 +3,6 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const cors = require('cors');
 
 // 导入路由
 const authRouter = require('./routes/api/auth.js');
@@ -12,12 +11,6 @@ const viewRouter = require('./routes/api/view');
 const captchaRouter = require('./routes/api/captcha');
 
 const app = express();
-
-app.use(cors({
-  origin: "*",
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -30,7 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // 解决API跨域问题
-const allowedOrigins = ['http://127.0.0.1:3000', 'http://127.0.0.1:5173', 'http://127.0.0.1:3001', 'https://s.qcqx.cn', 'http://s.qcqx.cn', 'http://localhost:4000', undefined];
+const allowedOrigins = ['http://127.0.0.1:3000', 'http://127.0.0.1:5173', 'http://127.0.0.1:3001', 'https://pshare.rusin7.com', 'http://pshare.rusin7.com', 'http://localhost:4000', undefined];
 app.all("/*", function (req, res, next) {
   if (allowedOrigins.includes(req.headers.origin)) {
     res.header('Access-Control-Allow-Origin', req.headers.origin);
