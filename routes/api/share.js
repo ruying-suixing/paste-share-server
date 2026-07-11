@@ -167,6 +167,7 @@ router.post('/share/add', checkTokenMiddleware, (req, res) => {
       }
     })
   }).catch(err => {
+    console.error('创建分享失败详细错误：',err);
     console.log(err);
     res.json({
       code: '3010',
